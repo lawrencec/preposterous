@@ -23,7 +23,6 @@
             evtName = 'before' + evtName.charAt(0)
                 .toUpperCase() + evtName.slice(1);
             return before(null, fn, function() {
-                    console.log(arguments, evtName, this);
                     fire(
                         this,
                         evtName,
@@ -36,10 +35,7 @@
             );
         },
         post : function(fn, evtName) {
-            evtName = 'after' + evtName.charAt(0)
-                .toUpperCase() + evtName.slice(1);
             return after(null, fn, function() {
-                    console.log(arguments, evtName, this);
                     fire(
                         this,
                         evtName,
@@ -49,7 +45,7 @@
                         )
                     );
                 }
-            )
+            );
         },
         prepost : function(fn, evtName, datums) {
             var doCancelEventFlag = false;
@@ -80,7 +76,7 @@
                     },
                     function() {
                         var target = new preposterous.EventTarget(
-                            beforeEvtName,
+                            evtName,
                             this,
                             function() {
                               //cancel event

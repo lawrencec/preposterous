@@ -1,7 +1,7 @@
 {
   "name": "preposterous",
   "description": "Adds ability to automatically fire before (pre) and after (post) events when a method is called",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "keywords": ["prepost", "aop", "aspect", "events", "ender"],
   "homepage": "http://github.com/lawrencec/prepostorous",
   "authors": ["Lawrence Carvalho"],

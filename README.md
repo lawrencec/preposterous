@@ -1,4 +1,4 @@
-# PrePosterous ![Build Status](https://secure.travis-ci.org/lawrencec/preposterous.png)](http://travis-ci.org/lawrencec/preposterous)
+# PrePosterous [![Build Status](https://secure.travis-ci.org/lawrencec/preposterous.png)](http://travis-ci.org/lawrencec/preposterous)
 
 Small library that fires 'before' (pre) and 'after' (post) events when methods are called.
 

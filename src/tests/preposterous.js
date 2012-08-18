@@ -1,4 +1,4 @@
-/*global describe, xdescribe, beforeEach, afterEach, it, xit, expect, spyOn, Cohere, require */
+/*global describe, xdescribe, beforeEach, afterEach, it, xit, expect, sinon.spy, Cohere, require */
 describe('Preposterous basic behaviour', function() {
     "use strict";
 
@@ -28,15 +28,15 @@ describe('Preposterous basic behaviour', function() {
 
                 }
             },
-            spiedCallback = spyOn(handlerObject, 'handler').andCallThrough();
+            mySpy = sinon.spy(handlerObject, 'handler');
 
         // listen
-        subscribe(ActionObject, 'beforeAction', spiedCallback);
+        subscribe(ActionObject, 'beforeAction', mySpy);
         // fire
         ActionObject.doAction();
         // check
-        expect(spiedCallback.callCount).toEqual(1);
-        expect(spiedCallback.argsForCall[0][0].evtName).toEqual('beforeAction');
+        expect(mySpy).to.have.been.calledOnce;
+        expect(mySpy.getCall(0).args[0].evtName).to.equal('beforeAction');
     });
 
     it('fires post event correctly', function() {
@@ -53,15 +53,15 @@ describe('Preposterous basic behaviour', function() {
 
                 }
             },
-            spiedCallback = spyOn(handlerObject, 'handler').andCallThrough();
+            mySpy = sinon.spy(handlerObject, 'handler');
 
         // listen
-        subscribe(ActionObject, 'action', spiedCallback);
+        subscribe(ActionObject, 'action', mySpy);
         // fire
         ActionObject.doAction();
         // check
-        expect(spiedCallback.callCount).toEqual(1);
-        expect(spiedCallback.argsForCall[0][0].evtName).toEqual('action');
+        expect(mySpy).to.have.been.calledOnce;
+        expect(mySpy.getCall(0).args[0].evtName).to.equal('action');
     });
 
     it('fires pre/post events correctly', function() {
@@ -78,17 +78,17 @@ describe('Preposterous basic behaviour', function() {
 
                 }
             },
-            spiedCallback = spyOn(handlerObject, 'handler').andCallThrough();
+            mySpy = sinon.spy(handlerObject, 'handler');
 
         // listen
-        subscribe(ActionObject, 'beforeAction', spiedCallback);
-        subscribe(ActionObject, 'action', spiedCallback);
-        // fire
+        subscribe(ActionObject, 'beforeAction', mySpy);
+        subscribe(ActionObject, 'action', mySpy);
+//        fire
         ActionObject.doAction();
         // check
-        expect(spiedCallback.callCount).toEqual(2);
-        expect(spiedCallback.argsForCall[0][0].evtName).toEqual('beforeAction');
-        expect(spiedCallback.argsForCall[1][0].evtName).toEqual('action');
+        expect(mySpy.callCount).to.equal(2);
+        expect(mySpy.getCall(0).args[0].evtName).to.equal('beforeAction');
+        expect(mySpy.getCall(1).args[0].evtName).to.equal('action');
     });
 
     it('receives event data correctly', function() {
@@ -116,18 +116,18 @@ describe('Preposterous basic behaviour', function() {
 
                 }
             },
-            spiedCallback = spyOn(handlerObject, 'handler').andCallThrough();
+            mySpy = sinon.spy(handlerObject, 'handler');
 
         // listen
-        subscribe(ActionObject, 'beforeAction', spiedCallback);
-        subscribe(ActionObject, 'action', spiedCallback);
+        subscribe(ActionObject, 'beforeAction', mySpy);
+        subscribe(ActionObject, 'action', mySpy);
         // fire
         ActionObject.doAction();
         // check
-        expect(spiedCallback.callCount).toEqual(2);
-        expect(spiedCallback.argsForCall[0][0].evtName).toEqual('beforeAction');
-        expect(spiedCallback.argsForCall[0][0].data.bar).toEqual(42);
-        expect(spiedCallback.argsForCall[1][0].evtName).toEqual('action');
-        expect(spiedCallback.argsForCall[1][0].data.bar).toEqual(42);
+        expect(mySpy.callCount).to.equal(2);
+        expect(mySpy.getCall(0).args[0].evtName).to.equal('beforeAction');
+        expect(mySpy.getCall(0).args[0].data.bar).to.equal(42);
+        expect(mySpy.getCall(1).args[0].evtName).to.equal('action');
+        expect(mySpy.getCall(1).args[0].data.bar).to.equal(42);
     });
 });

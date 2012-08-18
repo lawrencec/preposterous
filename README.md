@@ -48,7 +48,7 @@ before, after or around any specified method.
 
 
     // listen
-    subscribe(ActionObject, 'beforeAction', handlerObject);
+    subscribe(ActionObject, 'beforeAction', handlerObject.handler);
     // fire
     ActionObject.doAction();
     // handlerObj.handler will get called receiving an event of 'beforeAction'
@@ -71,7 +71,7 @@ before, after or around any specified method.
 
 
     // listen
-    subscribe(ActionObject, 'action', handlerObject);
+    subscribe(ActionObject, 'action', handlerObject.handler);
     // fire
     ActionObject.doAction();
     // handlerObj.handler will get called receiving an event of 'action'
@@ -90,11 +90,9 @@ before, after or around any specified method.
 
             }
         },
-        spiedCallback = spyOn(handlerObject, 'handler').andCallThrough();
-
     // listen
-    subscribe(ActionObject, 'beforeAction', spiedCallback);
-    subscribe(ActionObject, 'action', spiedCallback);
+    subscribe(ActionObject, 'beforeAction', handlerObject.handler);
+    subscribe(ActionObject, 'action', handlerObject.handler);
     // fire
     ActionObject.doAction();
     // handlerObj.handler will get called twice first receiving an event of 'beforeAction'
@@ -103,3 +101,15 @@ before, after or around any specified method.
 ## Tests
 
 See the index.html file in the tests directory
+
+If you have testem installed run it from the root directory of the repo.
+
+    testem
+
+or
+
+    testem ci -b Chrome
+
+Mocha tests can be run with phantomjs (note the ci hash parameter):
+
+    phantomjs ./lib/test-helpers/run-mocha.js file://localhost/$(pwd)/src/tests/index.html#ci

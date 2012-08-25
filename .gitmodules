@@ -13,3 +13,6 @@
 [submodule "lib/sinonjs"]
 	path = lib/sinonjs
 	url = git://github.com/cjohansen/Sinon.JS.git
+[submodule "lib/JSCovReporter"]
+	path = lib/JSCovReporter
+	url = git@github.com:lawrencec/JSCovReporter.git

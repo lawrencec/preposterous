@@ -4,7 +4,8 @@ Small library that fires 'before' (pre) and 'after' (post) events when methods a
 
 ## Cloning and Dependencies:
 
-The Jasmine testing framework is used for the tests and is added as a submodule.
+There are multiple testing libraries/frameworks that are used for the tests and are set up as git submodules. In order for the tests to work, these submodules
+must be initialised correctly.
 
 You can either clone this repo with the submodules in one command like so:
 
@@ -16,7 +17,8 @@ or separately
     <cd clonedrepo>
     git submodule update --init --recursive
 
-[Ender](http://ender.no.de) and the following dependencies are required.
+
+[Ender](http://ender.no.de) and the following (ender) dependencies are required.
 
 [aspectos](https://github.com/lawrencec/aspectos)
 [bean](https://github.com/fat/bean)
@@ -110,6 +112,8 @@ or
 
     testem ci -b Chrome
 
+There are also jscoverage tests that can be seen in the src/tests/with-coverage.html page. Instrumented code is generated via [coverjs](https://github.com/arian/CoverJS) and report generated using [JSCovReporter](https://github.com/lawrencec/JSCovReporter)
+
 Mocha tests can be run with phantomjs (note the ci hash parameter):
 
-    phantomjs ./lib/test-helpers/run-mocha.js file://localhost/$(pwd)/src/tests/index.html#ci
+    phantomjs ./lib/test-helpers/run-mocha.js file://localhost/$(pwd)/src/tests/index.html#phjs

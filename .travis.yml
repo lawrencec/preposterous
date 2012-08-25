@@ -4,4 +4,4 @@ rvm:
 notifications:
   email: false
 script:
-  - "phantomjs ./lib/test-helpers/run-mocha.js file://localhost/$(pwd)/src/tests/index.html#ci"
+  - "phantomjs ./lib/test-helpers/run-mocha.js file://localhost/$(pwd)/src/tests/index.html#phjs"

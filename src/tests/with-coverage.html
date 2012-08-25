@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>&#60;Preposterous&#62; </title>
+    <!--Tests framework dependencies css -->
+    <link rel="stylesheet" href="../../lib/mocha/mocha.css" />
+    <link rel="stylesheet" href="../../lib/JSCovReporter/reporter.css" />
+
+    <!--Tests framework dependencies js-->
+    <script type="text/javascript" src="../../lib/chai/chai.js"></script>
+    <script type="text/javascript" src="../../lib/mocha/mocha.js"></script>
+    <script type="text/javascript" src="../../lib/sinon-chai/lib/sinon-chai.js"></script>
+    <script type="text/javascript" src="../../lib/sinonjs/lib/sinon.js"></script>
+    <script type="text/javascript" src="../../lib/sinonjs/lib/sinon/spy.js"></script>
+    <script type="text/javascript" src="../../lib/sinonjs/lib/sinon/match.js"></script>
+
+    <!-- Code coverage -->
+    <script type="text/javascript" src="../../lib/JSCovReporter/JSCovReporter.js"></script>
+
+    <script>
+        var assert = chai.assert,
+            expect = chai.expect,
+            should = chai.should(); // Note that should has to be executed
+
+        mocha.setup('bdd');
+    </script>
+
+    <!--Test dependencies-->
+    <script type="text/javascript" src="../../lib/ender.js"></script>
+    <script type="text/javascript" src="../instrumented/preposterous.js"></script>
+
+    <!--Tests-->
+    <script type="text/javascript" src="./preposterous.js"></script>
+
+    <!-- Testem support -->
+    <script type="text/javascript">
+        if (location.hash.indexOf('#testem') !== -1) {
+            document.write('<script src="/testem.js"></'+'script>');
+        }
+    </script>
+</head>
+<body>
+<div id="mocha"></div>
+<div id="coverage"></div>
+<div id="menu"></div>
+
+<script type="text/javascript">
+    //todo rewrite this so is a function
+    (function() {
+        function coverageFunc() {
+            if (typeof window.__$coverObject !== 'undefined') {
+                var reporter = new JSCovReporter();
+                reporter.initialize({ coverObject: window.__$coverObject })
+            }
+        }
+        // if not run by phantomjs runner, start mocha
+        if (location.hash.indexOf('#phjs') === -1) {
+            mocha.run(coverageFunc);
+        }
+    })();
+
+</script>
+</body>
+</html>

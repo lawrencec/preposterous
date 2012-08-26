@@ -15,4 +15,4 @@
 	url = git://github.com/cjohansen/Sinon.JS.git
 [submodule "lib/JSCovReporter"]
 	path = lib/JSCovReporter
-	url = git://github.com:lawrencec/JSCovReporter.git
+	url = git://github.com/lawrencec/JSCovReporter.git

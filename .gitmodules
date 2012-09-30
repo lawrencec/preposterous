@@ -1,0 +1,18 @@
+[submodule "lib/ender"]
+	path = lib/ender
+	url = https://github.com/ender-js/Ender.git
+[submodule "lib/mocha"]
+	path = lib/mocha
+	url = git://github.com/visionmedia/mocha.git
+[submodule "lib/chai"]
+	path = lib/chai
+	url = git://github.com/chaijs/chai.git
+[submodule "lib/sinon-chai"]
+	path = lib/sinon-chai
+	url = git://github.com/domenic/sinon-chai.git
+[submodule "lib/sinonjs"]
+	path = lib/sinonjs
+	url = git://github.com/cjohansen/Sinon.JS.git
+[submodule "lib/JSCovReporter"]
+	path = lib/JSCovReporter
+	url = git://github.com/lawrencec/JSCovReporter.git

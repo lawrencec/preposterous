@@ -3,42 +3,185 @@
 <head>
     <title>Preposterous Tests</title>
 
-    <script type="text/javascript" src="https://raw.github.com/lawrencec/preposterous/master/lib/ender.js"></script>
+    <script type="text/javascript"
+            src="https://raw.github.com/lawrencec/preposterous/master/lib/ender.js"></script>
     <!--Library code-->
-    <script type="text/javascript" src="https://raw.github.com/lawrencec/preposterous/master/src/preposterous.js"></script>
+    <script type="text/javascript"
+            src="https://raw.github.com/lawrencec/preposterous/master/src/preposterous.js"></script>
     <!--Tests dependencies-->
     <script type="text/javascript" src="lib/chai/chai.js"></script>
     <script type="text/javascript" src="lib/mocha/mocha.js"></script>
-    <script type="text/javascript" src="lib/sinon-chai/lib/sinon-chai.js"></script>
+    <script type="text/javascript"
+            src="lib/sinon-chai/lib/sinon-chai.js"></script>
     <script type="text/javascript" src="lib/sinonjs/lib/sinon.js"></script>
     <script type="text/javascript" src="lib/sinonjs/lib/sinon/spy.js"></script>
-    <script type="text/javascript" src="lib/sinonjs/lib/sinon/match.js"></script>
+    <script type="text/javascript"
+            src="lib/sinonjs/lib/sinon/match.js"></script>
     <script>
         var assert = chai.assert,
-            expect = chai.expect,
-            should = chai.should(); // Note that should has to be executed
+                expect = chai.expect,
+                should = chai.should(); // Note that should has to be executed
 
         mocha.setup('bdd');
     </script>
 
     <!--Tests-->
-    <script type="text/javascript" src="https://raw.github.com/lawrencec/preposterous/master/src/tests/preposterous.js"></script>
+    <script type="text/javascript"
+            src="https://raw.github.com/lawrencec/preposterous/master/src/tests/preposterous.js"></script>
 
     <!-- Testem support -->
     <script type="text/javascript">
-        if (location.hash.indexOf('#testem') !== -1) {
-            document.write('<script src="/testem.js"></'+'script>');
-        }
-    </script>
-    <script type="text/javascript">
-    if (location.hash.indexOf('#phjs') === -1) {
-        document.write('<script type="text/javascript">'+'$.domReady(function() { mocha.run()});</'+'script>');
-    }
+        $.domReady(function() {
+            mocha.run()
+        });
     </script>
 
-    <link rel="stylesheet" href="lib/mocha/mocha.css" />
+    <link rel="stylesheet" href="lib/mocha/mocha.css"/>
+    <style type="text/css">
+        body {
+            font-size: 16px;
+        }
+
+        pre {
+            background-color: #F8F8F8;
+            border: 1px solid #CCC;
+            font-size: 13px;
+            line-height: 19px;
+            overflow: auto;
+            padding: 6px 10px;
+            border-radius: 3px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        a {
+            color: #4183C4;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
+<h1>PrePosterous <a href="http://travis-ci.org/lawrencec/preposterous"><img src="https://secure.travis-ci.org/lawrencec/preposterous.png" alt="Build Status"></a></h1>
+<p>Small library that fires &#39;before&#39; (pre) and &#39;after&#39; (post) events when methods are called.
+
+</p>
+<h2>Cloning and Dependencies:</h2>
+<p>There are multiple testing libraries/frameworks that are used for the tests and are set up as git submodules. In order for the tests to work, these submodules
+must be initialised correctly.
+
+</p>
+<p>You can either clone this repo with the submodules in one command like so:
+
+</p>
+<pre><code>git clone REPO_URL --recursive</code></pre>
+<p>or separately
+
+</p>
+<pre><code>git clone REPO_URL
+&lt;cd clonedrepo&gt;
+git submodule update --init --recursive</code></pre>
+<p><a href="http://ender.no.de">Ender</a> and the following (ender) dependencies are required.
+
+</p>
+<p><a href="https://github.com/lawrencec/aspectos">aspectos</a>
+<a href="https://github.com/fat/bean">bean</a>
+
+</p>
+<p>A pre-built ender.js (with all dependencies) is provided in the /lib directory. If you have ender installed
+you can re-build ender.js and the dependencies by <code>ender refresh</code> in the /lib directory.
+
+</p>
+<h2>Usage</h2>
+<p>Aspectos provides three methods to provide the basic functionality of firing events
+before, after or around any specified method.
+
+</p>
+<h3>before</h3>
+<pre><code>var ActionObject = {
+        doAction : preposterous.pre(
+            function(args) {
+
+            },
+            &#39;action&#39; //event name to fire
+        )
+    },
+    handlerObject = {
+        handler: function(e) {
+
+        }
+    };
+
+
+// listen
+subscribe(ActionObject, &#39;beforeAction&#39;, handlerObject.handler);
+// fire
+ActionObject.doAction();
+// handlerObj.handler will get called receiving an event of &#39;beforeAction&#39;</code></pre>
+<h2>after</h2>
+<pre><code>var ActionObject = {
+        doAction : preposterous.post(
+            function(args) {
+
+            },
+            &#39;action&#39; //event name to fire
+        )
+    },
+    handlerObject = {
+        handler: function(e) {
+
+        }
+    }
+
+
+// listen
+subscribe(ActionObject, &#39;action&#39;, handlerObject.handler);
+// fire
+ActionObject.doAction();
+// handlerObj.handler will get called receiving an event of &#39;action&#39;</code></pre>
+<h2>around</h2>
+<pre><code>var ActionObject = {
+        doAction : preposterous.prepost(
+            function(args) {
+
+            },
+            &#39;action&#39; //event name to fire
+        )
+    },
+    handlerObject = {
+        handler: function(e) {
+
+        }
+    },
+// listen
+subscribe(ActionObject, &#39;beforeAction&#39;, handlerObject.handler);
+subscribe(ActionObject, &#39;action&#39;, handlerObject.handler);
+// fire
+ActionObject.doAction();
+// handlerObj.handler will get called twice first receiving an event of &#39;beforeAction&#39;
+// and then again receiving an event of &#39;action&#39;.</code></pre>
+<h2>Tests</h2>
+<p>See the index.html file in the tests directory
+
+</p>
+<p>If you have testem installed run it from the root directory of the repo.
+
+</p>
+<pre><code>testem</code></pre>
+<p>or
+
+</p>
+<pre><code>testem ci -b Chrome</code></pre>
+<p>There are also jscoverage tests that can be seen in the src/tests/with-coverage.html page. Instrumented code is generated via <a href="https://github.com/arian/CoverJS">coverjs</a> and report generated using <a href="https://github.com/lawrencec/JSCovReporter">JSCovReporter</a>
+
+</p>
+<p>Mocha tests can be run with phantomjs (note the ci hash parameter):
+
+</p>
+<pre><code>phantomjs ./lib/test-helpers/run-mocha.js file://localhost/$(pwd)/src/tests/index.html#phjs</code></pre>
+
+<h3>Test Results</h3>
 <div id="mocha"></div>
 </body>
 </html>

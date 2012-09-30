@@ -1,0 +1,25 @@
+body {
+    font-size: 16px;
+}
+
+pre {
+    background-color: #F8F8F8;
+    border: 1px solid #CCC;
+    font-size: 13px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 10px;
+    border-radius: 3px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+a {
+    color: #4183C4;
+    text-decoration: none;
+}
+h1 img {
+    margin: 0;
+}

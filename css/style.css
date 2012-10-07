@@ -23,3 +23,7 @@ a {
 h1 img {
     margin: 0;
 }
+
+#readme {
+    width: 80%;
+}

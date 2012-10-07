@@ -20,8 +20,8 @@ or separately
 
 [Ender](http://ender.no.de) and the following (ender) dependencies are required.
 
-[aspectos](https://github.com/lawrencec/aspectos)
-[bean](https://github.com/fat/bean)
+- [aspectos](https://github.com/lawrencec/aspectos)
+- [bean](https://github.com/fat/bean)
 
 A pre-built ender.js (with all dependencies) is provided in the /lib directory. If you have ender installed
 you can re-build ender.js and the dependencies by <code>ender refresh</code> in the /lib directory.

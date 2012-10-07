@@ -29,7 +29,6 @@
     <script type="text/javascript"
             src="https://raw.github.com/lawrencec/preposterous/master/src/tests/preposterous.js"></script>
 
-    <!-- Testem support -->
     <script type="text/javascript">
         $.domReady(function() {
             mocha.run()

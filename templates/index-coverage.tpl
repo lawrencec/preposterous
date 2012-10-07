@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="lnguage-javascript">
-{{ content }}
+<div id="readme">{{ content }}</div>
 <h3>Test Results</h3>
 <div id="mocha"></div>
 <div id="coverage"></div>
